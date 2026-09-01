@@ -1,0 +1,621 @@
+from pathlib import Path
+import re
+
+src_path = Path("/mnt/data/Pasted text(2).txt")
+out_path = Path("/mnt/data/VOXENYTH_Android_Privacy_Policy.html")
+
+html = src_path.read_text(encoding="utf-8")
+
+# Preserve the original legal structure/content while rebranding the app.
+html = html.replace("Kitty Pounce: Strike &amp; Leap", "VOXENYTH")
+html = html.replace("Kitty Pounce:\n", "VOXENYTH\n")  # defensive for wrapped occurrences
+html = html.replace("Strike &amp; Leap", "")  # defensive cleanup after wrapped source
+html = html.replace("Kitty Pounce: Strike & Leap", "VOXENYTH")
+html = html.replace("Kitty Pounce", "VOXENYTH")
+
+# Head metadata / page title
+html = re.sub(
+    r'<meta\s+name="description"\s+content="[^"]*"\s*/>',
+    '<meta name="description" content="Official Android Privacy Policy for VOXENYTH by KanjaX, including Google Play and Google AdMob disclosures." />',
+    html,
+    flags=re.S,
+)
+html = re.sub(
+    r'<meta\s+name="theme-color"\s+content="[^"]*"\s*/>',
+    '<meta name="theme-color" content="#09070d" />',
+    html,
+    flags=re.S,
+)
+html = re.sub(
+    r"<title>.*?</title>",
+    "<title>Privacy Policy | VOXENYTH</title>",
+    html,
+    flags=re.S,
+)
+
+# Completely redesign the visual layer while retaining the original policy sections.
+new_style = r'''
+  <style>
+    :root {
+      --bg: #050409;
+      --bg-2: #09070d;
+      --panel: rgba(13, 10, 18, 0.90);
+      --panel-2: rgba(21, 15, 27, 0.72);
+      --panel-3: rgba(255,255,255,0.035);
+      --text: #f6f2f8;
+      --muted: #c4b8ca;
+      --faint: #82748c;
+      --violet: #a56cff;
+      --violet-2: #6e3dbe;
+      --crimson: #ff465d;
+      --crimson-soft: rgba(255,70,93,0.16);
+      --cyan: #74e6dc;
+      --gold: #e5bc73;
+      --border: rgba(205,178,223,0.13);
+      --border-strong: rgba(165,108,255,0.26);
+      --shadow: 0 30px 90px rgba(0,0,0,0.58);
+      --radius-xl: 30px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% -10%, rgba(165,108,255,.18), transparent 28rem),
+        radial-gradient(circle at 93% 10%, rgba(255,70,93,.10), transparent 30rem),
+        radial-gradient(circle at 48% 112%, rgba(110,61,190,.18), transparent 34rem),
+        linear-gradient(180deg, #050409 0%, #09070d 48%, #050409 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      opacity: .40;
+      background-image:
+        linear-gradient(rgba(255,255,255,.014) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.014) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.8) 52%, transparent 100%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background:
+        repeating-linear-gradient(
+          115deg,
+          transparent 0 54px,
+          rgba(165,108,255,.018) 55px 56px,
+          transparent 57px 110px
+        );
+    }
+
+    .orb {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: -1;
+      opacity: .14;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    .orb.one { top: 4%; left: -130px; background: var(--violet); }
+    .orb.two { top: 42%; right: -150px; background: var(--crimson); animation-delay: -5s; }
+    .orb.three { bottom: -120px; left: 42%; background: #5e28a0; animation-delay: -9s; }
+
+    @keyframes drift {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(38px,-28px,0) scale(1.12); }
+    }
+
+    .page {
+      width: min(100% - 30px, 1060px);
+      margin: 0 auto;
+      padding: 34px 0 70px;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: 520px;
+      padding: 48px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(145deg, rgba(29,18,39,.92), rgba(10,8,14,.94) 62%, rgba(18,9,15,.92)),
+        radial-gradient(circle at 85% 20%, rgba(255,70,93,.11), transparent 26rem);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.045);
+    }
+
+    .hero::before {
+      content: "V";
+      position: absolute;
+      right: -12px;
+      top: -65px;
+      z-index: -1;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(17rem, 38vw, 28rem);
+      font-weight: 900;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(165,108,255,.08);
+      transform: rotate(4deg);
+      user-select: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -55% 30%;
+      height: 400px;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(165,108,255,.11), transparent 68%);
+      filter: blur(18px);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 64px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(181,129,255,.34);
+      background:
+        linear-gradient(145deg, rgba(165,108,255,.28), rgba(255,70,93,.10)),
+        #110c17;
+      box-shadow: 0 16px 44px rgba(106,48,176,.23), inset 0 1px 0 rgba(255,255,255,.08);
+      color: #f6efff;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 800;
+      font-size: 31px;
+      text-shadow: 0 0 18px rgba(165,108,255,.7);
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,70,93,.75), transparent);
+      transform: rotate(-34deg);
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.28rem;
+      font-weight: 860;
+      letter-spacing: .13em;
+    }
+
+    .brand-subtitle {
+      margin: 5px 0 0;
+      color: var(--faint);
+      font-size: .9rem;
+      letter-spacing: .04em;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      padding: 9px 13px;
+      border: 1px solid rgba(165,108,255,.25);
+      border-radius: 999px;
+      background: rgba(165,108,255,.075);
+      color: #ded1e7;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--crimson);
+      box-shadow: 0 0 14px rgba(255,70,93,.9);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 8vw, 6.2rem);
+      font-weight: 700;
+      line-height: .93;
+      letter-spacing: -.055em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #f8f4fb 8%, #cbb2f2 50%, #ff7185 110%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 740px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 1.02rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .meta-chip {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.026);
+      color: #aa9bb4;
+      font-size: .78rem;
+    }
+
+    .content {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(14,11,18,.94), rgba(8,7,11,.96));
+      box-shadow: var(--shadow);
+    }
+
+    .toc {
+      padding: 28px 30px;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 8% 0, rgba(165,108,255,.10), transparent 20rem),
+        rgba(255,255,255,.012);
+    }
+
+    .toc-title {
+      margin: 0 0 14px;
+      color: #83758b;
+      font-size: .72rem;
+      font-weight: 850;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .toc-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .toc-links a {
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.055);
+      border-radius: 10px;
+      background: rgba(255,255,255,.025);
+      color: #c6bacd;
+      text-decoration: none;
+      font-size: .8rem;
+      transition: .2s ease;
+    }
+
+    .toc-links a:hover,
+    .toc-links a:focus-visible {
+      color: #fff;
+      border-color: rgba(165,108,255,.32);
+      background: rgba(165,108,255,.10);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .policy { padding: 8px 40px 42px; }
+
+    .section {
+      position: relative;
+      padding: 34px 0 35px;
+      border-bottom: 1px solid rgba(255,255,255,.055);
+    }
+    .section:last-child { border-bottom: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .section-number {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: #e8ddf0;
+      font-size: .76rem;
+      font-weight: 850;
+      border: 1px solid rgba(165,108,255,.22);
+      background: linear-gradient(145deg, rgba(165,108,255,.14), rgba(255,70,93,.045));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    h2 {
+      margin: 5px 0 0;
+      font-size: 1.28rem;
+      letter-spacing: -.02em;
+    }
+
+    h3 {
+      margin: 25px 0 8px;
+      color: #eee8f2;
+      font-size: 1rem;
+    }
+
+    p, li {
+      color: var(--muted);
+      font-size: .96rem;
+      line-height: 1.82;
+    }
+
+    ul { padding-left: 22px; }
+    li { margin: 6px 0; }
+    li::marker { color: #9569c6; }
+    strong { color: #f2edf5; }
+
+    a {
+      color: #c8a7ff;
+      text-decoration-color: rgba(200,167,255,.42);
+      text-underline-offset: 3px;
+    }
+    a:hover { color: #eadbff; }
+
+    .info-box,
+    .warning-box {
+      margin: 19px 0;
+      padding: 18px 19px;
+      border-radius: var(--radius-lg);
+    }
+
+    .info-box {
+      border: 1px solid rgba(116,230,220,.12);
+      background: linear-gradient(135deg, rgba(116,230,220,.055), rgba(165,108,255,.04));
+    }
+
+    .warning-box {
+      border: 1px solid rgba(229,188,115,.14);
+      background: linear-gradient(135deg, rgba(229,188,115,.065), rgba(255,70,93,.035));
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 11px;
+      margin-top: 17px;
+    }
+
+    .service-card {
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--panel-3);
+    }
+    .service-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 11px;
+      margin-top: 18px;
+      padding: 20px;
+      border: 1px solid rgba(165,108,255,.18);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 0 0, rgba(165,108,255,.10), transparent 17rem),
+        rgba(255,255,255,.024);
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: rgba(255,255,255,.035);
+      filter: grayscale(.4);
+    }
+
+    footer {
+      padding: 28px 16px 8px;
+      text-align: center;
+      color: var(--faint);
+      font-size: .82rem;
+      letter-spacing: .02em;
+    }
+
+    .footer-paw {
+      margin-bottom: 8px;
+      color: #9a72c8;
+      font-size: 18px;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: min(100% - 16px, 1060px);
+        padding-top: 10px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 30px 22px 34px;
+        border-radius: 22px;
+      }
+
+      .hero::before {
+        right: -30px;
+        top: -20px;
+        font-size: 17rem;
+      }
+
+      .brand-row { margin-bottom: 45px; }
+      .logo { width: 52px; height: 52px; font-size: 27px; }
+      h1 { font-size: clamp(2.75rem, 16vw, 4.5rem); }
+      .content { border-radius: 22px; }
+      .toc { padding: 22px; }
+      .policy { padding: 3px 22px 28px; }
+      .section { padding: 28px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .orb { animation: none; }
+      .toc-links a { transition: none; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      .orb, body::before, body::after { display: none; }
+      .page { width: 100%; padding: 0; }
+      .hero, .content {
+        background: #fff;
+        color: #111;
+        box-shadow: none;
+        border-color: #ddd;
+      }
+      .hero::before, .hero::after { display: none; }
+      p, li, .hero-description, .meta-chip, .brand-subtitle { color: #333; }
+      strong, h1, h2, h3 { color: #111; }
+      .gradient-text { color: #111; background: none; }
+      .toc { display: none; }
+    }
+  </style>'''
+
+html = re.sub(r"<style>.*?</style>", new_style.strip(), html, flags=re.S)
+
+# Replace the hero with a VOXENYTH-specific, dark-game presentation.
+hero = r'''
+    <section class="hero">
+      <div class="brand-row">
+        <div class="logo" aria-hidden="true">V</div>
+        <div>
+          <p class="brand-title">VOXENYTH</p>
+          <p class="brand-subtitle">Official Android Privacy Policy</p>
+        </div>
+      </div>
+
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Privacy · Data · Advertising
+      </div>
+
+      <h1>
+        Privacy beyond
+        <span class="gradient-text">the veil.</span>
+      </h1>
+
+      <p class="hero-description">
+        This Privacy Policy explains how <strong>VOXENYTH</strong>,
+        published by <strong>KanjaX</strong>, handles information when you
+        download, install, access, or play the Android game.
+      </p>
+
+      <div class="hero-meta">
+        <span class="meta-chip">Developer: KanjaX</span>
+        <span class="meta-chip">Android</span>
+        <span class="meta-chip">Google Play</span>
+        <span class="meta-chip">Google AdMob</span>
+        <span class="meta-chip">Last updated: September 1, 2026</span>
+      </div>
+    </section>'''
+
+# First top-level hero only.
+html = re.sub(
+    r'\s*<section class="hero">.*?</section>',
+    "\n" + hero,
+    html,
+    count=1,
+    flags=re.S,
+)
+
+# Make quick-navigation wording slightly more platform-clear without changing destinations.
+html = html.replace("Privacy &amp; Data Transparency", "Privacy · Data · Advertising")
+html = html.replace("Updated: August 26, 2026", "Last updated: September 1, 2026")
+
+# Footer theming
+html = html.replace(
+    '<div class="footer-paw">\n        🐾\n      </div>',
+    '<div class="footer-paw" aria-hidden="true">◆</div>'
+)
+
+# Add Android wording to the title/footer where appropriate.
+html = html.replace(
+    '<div>\n         Official Privacy Policy\n       </div>',
+    '<div>\n         Official Android Privacy Policy\n       </div>'
+)
+
+# Update the one future-feature wrapped artifact if replacement left awkward whitespace.
+html = re.sub(r"Future versions of VOXENYTH\s*may introduce", "Future versions of VOXENYTH may introduce", html)
+
+# Ensure page language/security-related link behavior remains intact.
+# Add a canonical meta hint for browser rendering, without external dependencies.
+head_insert = '  <meta name="color-scheme" content="dark" />\n'
+html = html.replace('  <meta charset="UTF-8" />\n', '  <meta charset="UTF-8" />\n' + head_insert, 1)
+
+out_path.write_text(html, encoding="utf-8")
+
+# Validation checks
+checks = {
+    "VOXENYTH present": "VOXENYTH" in html,
+    "Old game name removed": "Kitty Pounce" not in html and "Strike &amp; Leap" not in html,
+    "Developer present": "KanjaX" in html,
+    "AdMob present": "Google AdMob" in html,
+    "Google Privacy link present": "https://policies.google.com/privacy" in html,
+    "Google partner link present": "https://policies.google.com/technologies/partner-sites" in html,
+    "Contact email present": "kanjaxd1@gmail.com" in html,
+    "21 policy sections retained": html.count('class="section-number"') == 21,
+    "Responsive viewport present": 'name="viewport"' in html,
+    "Reduced-motion support": "prefers-reduced-motion" in html,
+}
+print(f"Created: {out_path}")
+print(f"Size: {out_path.stat().st_size:,} bytes")
+for name, ok in checks.items():
+    print(f"{'✓' if ok else '✗'} {name}")
