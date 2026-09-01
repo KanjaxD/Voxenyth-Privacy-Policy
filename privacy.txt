@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>VOXENYTH Privacy Policy</title><style>html{background:#020408}body{box-sizing:border-box;max-width:820px;margin:0 auto;padding:clamp(22px,5vw,52px);background:#070d16;color:#d9eeee;font-family:system-ui,sans-serif;line-height:1.7;min-height:100vh}h1{color:#8effd9;font-size:clamp(1.5rem,5vw,2.3rem)}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}a{color:#8effd9}@media(max-width:400px){body{font-size:14px}}</style><h1>VOXENYTH Privacy Policy</h1><pre>VOXENYTH — PRIVACY POLICY
+VOXENYTH — PRIVACY POLICY
 Effective date: 2026-09-01
 Publisher: KanjaX
 Privacy contact: kanjaxd1@gmail.com
@@ -22,11 +22,11 @@ Google advertising controls: https://myadcenter.google.com/
 4. Privacy choices
 The first-launch notice is shown once per app storage installation. Continuing acknowledges the notice; it is not permission for personalized advertising. You can read this policy from the main menu at any time.
 Where required and applicable to the configured audience, Google's UMP service offers choices before advertising requests are permitted. Required consent messages may appear again when Google or applicable law requires; they are separate from the game's one-time notice. The game does not request ads when the SDK has not allowed ad requests, or when privacy checks fail.
-Open Main Menu &gt; Privacy Policy &gt; Advertising privacy choices to check or manage the choices offered by Google. Some regions or protected audience settings do not require a choices form. Non-personalized ads are not a substitute for consent where consent is required. You may use Android's advertising privacy controls to reset or delete your advertising ID, depending on Android version.
+Open Main Menu > Privacy Policy > Advertising privacy choices to check or manage the choices offered by Google. Some regions or protected audience settings do not require a choices form. Non-personalized ads are not a substitute for consent where consent is required. You may use Android's advertising privacy controls to reset or delete your advertising ID, depending on Android version.
 You can always choose not to watch a rewarded ad. An interrupted or incomplete rewarded ad does not grant a reward unless Google confirms that the reward was earned. Interstitial ads do not grant game rewards and can be closed using the controls supplied by the ad provider.
 
 5. Retention and deletion
-Local game data remains until you use Settings &gt; Purge Save Data, clear the app's storage in Android settings, or uninstall the app. Purge Save Data resets game progress and cosmetics but keeps the one-time privacy acknowledgement and Google's separate privacy choices. To remove all app-local data, use Android Settings &gt; Apps &gt; VOXENYTH &gt; Storage &gt; Clear storage, or uninstall. Browser users can clear this site's storage.
+Local game data remains until you use Settings > Purge Save Data, clear the app's storage in Android settings, or uninstall the app. Purge Save Data resets game progress and cosmetics but keeps the one-time privacy acknowledgement and Google's separate privacy choices. To remove all app-local data, use Android Settings > Apps > VOXENYTH > Storage > Clear storage, or uninstall. Browser users can clear this site's storage.
 The developer cannot remotely retrieve, restore or delete a local save. There is no account to delete. Clearing local app data does not delete information already processed by Google. Google's retention rules and deletion controls govern data held by Google; consult its policy and privacy controls. Privacy or support messages you voluntarily send are used to answer your request and may be retained as needed to resolve it and meet applicable obligations. Do not send sensitive personal information unnecessarily.
 
 6. Permissions and security
@@ -40,4 +40,3 @@ If you believe a child provided personal information improperly through this app
 8. Changes and contact
 The publisher may update this policy when the game or its data practices change. The current version is available in the app and at the published policy URL above. Material changes requiring renewed disclosure or consent will be handled separately from the first-launch acknowledgement.
 For privacy questions or applicable data rights requests, contact kanjaxd1@gmail.com. Describe your request without including passwords or payment information.
-</pre></html>
